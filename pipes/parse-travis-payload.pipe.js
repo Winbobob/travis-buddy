@@ -3,10 +3,21 @@ const GitHub = require('better-github-api');
 const ordinal = require('ordinal');
 
 const getJobDisplayName = (job, index) => {
-  if (job.config.language === 'node_js')
+  if (job.config.language === 'node_js') {
     return `Node.js: ${job.config.node_js}`;
-  else if (job.config.language === 'ruby') return `Ruby: ${job.config.rvm}`;
-
+  } else if (job.config.language === 'ruby') {
+    if (index === 0) {
+      return 'Feature Tests:'
+    } else if (index === 1) {
+      return 'Unit Tests:'
+    } else if (index === 3) {
+      return 'Integration Tests:'
+    } else if (index === 4) {
+      return 'Helper Tests:'
+    } else {
+      return `Ruby: ${job.config.rvm}`;
+    }
+  }
   return `${ordinal(index + 1)} Build`;
 };
 
