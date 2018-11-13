@@ -1,21 +1,19 @@
 ## Travis tests have failed
 
 Hey @{{pullRequestAuthor}},
-Please read the following log in order to understand the failure reason.
+Please click the following black triangle (&#9654;) in order to see the detailed information.
 It'll be awesome if you fix what's wrong and commit the changes.
 
 {{#jobs}}
 
 ### {{displayName}}
 
-<a href="{{link}}">View build log</a>
-
 {{#scripts}}
 
 <details>
   <summary>
     <strong>
-     {{command}}
+     Detailed Information
     </strong>
   </summary>
 
@@ -27,5 +25,3 @@ It'll be awesome if you fix what's wrong and commit the changes.
 
 {{/scripts}}
 {{/jobs}}
-
-###### TravisBuddy Request Identifier: {{requestId}}
