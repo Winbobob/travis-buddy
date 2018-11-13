@@ -2,4 +2,4 @@ travisBuddy:
   templates:
     success: default
     failure: default
-  insertMode: append
+  insertMode: update
