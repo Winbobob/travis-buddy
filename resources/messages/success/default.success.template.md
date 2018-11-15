@@ -1,6 +1,2 @@
 Hey @{{pullRequestAuthor}},  
-Your changes look good to me!
-
-<a href="{{link}}">View build log</a>
-
-###### TravisBuddy Request Identifier: {{requestId}}
+Your changes look good to me! :tada:
