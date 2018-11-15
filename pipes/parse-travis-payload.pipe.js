@@ -6,13 +6,13 @@ const getJobDisplayName = (job, index) => {
   if (job.config.language === 'node_js') {
     return `Node.js: ${job.config.node_js}`;
   } else if (job.config.language === 'ruby') {
-    if (job.log.indexOf('TESTFOLDER=features') >= 0) {
+    if (job.config.env === 'TESTFOLDER=features') {
       return 'Feature Tests:'
-    } else if (job.log.indexOf('TESTFOLDER=models') >= 0) {
+    } else if (job.config.env === 'TESTFOLDER=models') {
       return 'Unit Tests:'
-    } else if (job.log.indexOf('TESTFOLDER=controllers') >= 0) {
+    } else if (job.config.env === 'TESTFOLDER=controllers') {
       return 'Integration Tests:'
-    } else if (job.log.indexOf('TESTFOLDER=helpers') >= 0) {
+    } else if (job.config.env === 'TESTFOLDER=helpers') {
       return 'Helper Tests:'
     } else {
       return `Ruby: ${job.config.rvm}`;
