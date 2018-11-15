@@ -15,7 +15,7 @@ const getJobDisplayName = (job, index) => {
     } else if (job.config.env === 'TESTFOLDER=helpers') {
       return 'Helper Tests:'
     } else {
-      return `Ruby: ${job.config.rvm}`;
+      return `Ruby: ${job.config.env}`;
     }
   }
   return `${ordinal(index + 1)} Build`;
