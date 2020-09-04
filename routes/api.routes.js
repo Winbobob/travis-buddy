@@ -6,6 +6,7 @@ const uuid = require('uuid/v1');
 const validation = require('../pipes/validation.pipe');
 const wait = require('../pipes/wait.pipe');
 const parse = require('../pipes/parse.pipe');
+const rerun = require('../pipes/listen-user-rerun-comment.pipe');
 const metadata = require('../pipes/metadata.pipe');
 const star = require('../pipes/star.pipe');
 const fetchConfiguration = require('../pipes/fetch-configuration.pipe');
@@ -26,6 +27,7 @@ const createApiRoutes = options => {
       .pipe('load payload', {
         startTime: new Date().getTime(),
         payload: JSON.parse(req.body.payload),
+        path: req.path,
         query: req.query,
         requestId: uuid(),
       })
@@ -39,6 +41,47 @@ const createApiRoutes = options => {
       .pipe('format message', formatMessage)
       .pipeIf(options.isTest !== true, 'publish', publish)
       .pipe('finish', finish)
+      .afterPipe((context, pipe) =>
+        logger.log(
+          `Pipe ${pipe} finished`,
+          { logType: 'pipe-finished' },
+          context,
+        ),
+      )
+      .beforePipe((context, pipe) => {
+        if (!context) context = {};
+        context.currentPipe = pipe;
+        return context;
+      })
+      .resolve()
+      .then(context => ({
+        ok: true,
+        status: 201,
+        context: options.returnRequestContext ? context : undefined,
+      }))
+      .catch(error => {
+        logger.error(error);
+
+        return {
+          ok: false,
+          error: error.message,
+          status: error.status,
+        };
+      })
+      .then(result => res.status(result.status || 500).send(result)),
+  );
+
+  router.post('/rerun', async (req, res) =>
+    paipu
+      .pipe('load payload', {
+        startTime: new Date().getTime(),
+        payload: JSON.parse(req.body.payload),
+        path: req.path,
+      })
+      .pipe('get metadata', metadata)
+      .pipe('wait', wait)
+      .pipe('parse payload', parse)
+      // .pipe('rerun jenkins build', rerun)
       .afterPipe((context, pipe) =>
         logger.log(
           `Pipe ${pipe} finished`,
