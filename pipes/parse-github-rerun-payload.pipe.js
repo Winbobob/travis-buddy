@@ -1,38 +1,5 @@
 const axios = require('axios');
-const GitHub = require('better-github-api');
 const logger = require('../utils/logger');
-
-const getAllComments = async (githubToken, owner, repo, pullRequestNumber) => {
-  if (!githubToken) {
-    logger.warn('No Github token, cannot fetch comments');
-    return [];
-  }
-
-  const gh = new GitHub({
-    token: githubToken,
-  });
-
-  const issues = gh.getIssues(owner, repo);
-  const comments = [];
-  let page = 1;
-  let bulk;
-
-  do {
-    try {
-      bulk = await issues.listIssueComments(pullRequestNumber, {
-        page,
-      });
-    } catch (e) {
-      break;
-    }
-
-    comments.push(...bulk.data);
-
-    page += 1;
-  } while (bulk.data.length > 0);
-
-  return comments;
-};
 
 const getTravisBuildNumber = async (travisToken, pullRequestNumber) => {
   const headers = {
@@ -93,18 +60,13 @@ const parseGithubRerunPayload = async ({
   owner: payload.repository.owner.login,
   repo: payload.repository.name,
   pullRequestNumber: payload.issue.number,
+  comment: payload.comment.body,
+  commentAuthor: payload.comment.user.login,
+  commentUpdateAt: payload.comment.updated_at,
 
   payload,
   meta,
   ...restOfContext,
-
-  comments:
-    (await getAllComments(
-      meta.githubToken,
-      payload.repository.owner.login,
-      payload.repository.name,
-      payload.issue.number,
-    )) || [],
 
   travisBuildNumber: await getTravisBuildNumber(
     meta.travisToken,

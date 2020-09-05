@@ -4,20 +4,12 @@ const logger = require('../utils/logger');
 const listenUserRerunComment = async context => {
   // https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist
 
-  const userComments = context.comments
-    .filter(comment => comment.user.login === 'Winbobob')
-    .sort(function(a, b) {
-      dateA = new Date(a.updated_at);
-      dateB = new Date(b.updated_at);
-      return dateB - dateA;
-    });
-
-  const latestComment = userComments[0];
-
   if (
-    // latestComment.body.toLowerCase() === '/rerun' &&
-    // Math.floor((Date.now() - Date.parse(latestComment.updated_at)) / 1000) < 5 // less than 5s
-    true
+    context.comment.toLowerCase() === '/rerun' &&
+    context.commentAuthor === 'Winbobob' &&
+    Math.floor(
+      (Date.now() - Date.parse(context.commentUpdateAt.updated_at)) / 1000,
+    ) < 5 // less than 5s
   ) {
     // https://nodejs.dev/learn/make-an-http-post-request-using-nodejs
     // https://docs.travis-ci.com/user/notifications/#webhooks-delivery-format
