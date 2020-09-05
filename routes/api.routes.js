@@ -76,7 +76,7 @@ const createApiRoutes = options => {
     paipu
       .pipe('load payload', {
         startTime: new Date().getTime(),
-        payload: JSON.parse(req.payload),
+        payload: JSON.parse(req.body.payload),
         path: req.path,
       })
       .pipe('get metadata', metadata)
