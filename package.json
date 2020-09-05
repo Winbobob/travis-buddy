@@ -27,6 +27,7 @@
   "license": "ISC",
   "dependencies": {
     "@sentry/node": "^4.0.3",
+    "axios": "^0.20.0",
     "better-github-api": "^4.0.1",
     "body-parser": "~1.18.2",
     "bunyan": "^1.8.12",

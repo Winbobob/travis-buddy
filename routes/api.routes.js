@@ -81,7 +81,7 @@ const createApiRoutes = options => {
       .pipe('get metadata', metadata)
       .pipe('wait', wait)
       .pipe('parse payload', parse)
-      // .pipe('rerun jenkins build', rerun)
+      .pipe('rerun jenkins build', rerun)
       .afterPipe((context, pipe) =>
         logger.log(
           `Pipe ${pipe} finished`,
@@ -97,7 +97,7 @@ const createApiRoutes = options => {
       .resolve()
       .then(context => ({
         ok: true,
-        status: 201,
+        status: 202,
         context: options.returnRequestContext ? context : undefined,
       }))
       .catch(error => {

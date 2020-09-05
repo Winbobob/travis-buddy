@@ -3,6 +3,7 @@ const logger = require('../utils/logger');
 
 const listenUserRerunComment = async context => {
   // https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist
+
   const userComments = context.comments
     .filter(comment => comment.user.login === 'Winbobob')
     .sort(function(a, b) {
@@ -29,7 +30,7 @@ const listenUserRerunComment = async context => {
 
     axios
       .post(
-        `https://api.travis-ci.org/build/${context.buildNumber}/restart`,
+        `https://api.travis-ci.org/build/${context.travisBuildNumber}/restart`,
         {},
         {
           headers: headers,
