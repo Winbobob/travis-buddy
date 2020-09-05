@@ -5,7 +5,8 @@ const uuid = require('uuid/v1');
 
 const validation = require('../pipes/validation.pipe');
 const wait = require('../pipes/wait.pipe');
-const parse = require('../pipes/parse.pipe');
+const parseTravisPayload = require('../pipes/parse-travis-payload.pipe');
+const parseGithubPayload = require('../pipes/parse-github-rerun-payload.pipe');
 const rerun = require('../pipes/listen-user-rerun-comment.pipe');
 const metadata = require('../pipes/metadata.pipe');
 const star = require('../pipes/star.pipe');
@@ -34,7 +35,7 @@ const createApiRoutes = options => {
       .pipe('validate payload', validation)
       .pipe('get metadata', metadata)
       .pipe('wait', wait)
-      .pipe('parse payload', parse)
+      .pipe('parse payload', parseTravisPayload)
       .pipe('star repo', star)
       .pipe('fetch configuration', fetchConfiguration)
       .pipe('search for a stop comment', searchStopComment)
@@ -80,7 +81,7 @@ const createApiRoutes = options => {
       })
       .pipe('get metadata', metadata)
       .pipe('wait', wait)
-      .pipe('parse payload', parse)
+      .pipe('parse payload', parseGithubPayload)
       .pipe('rerun jenkins build', rerun)
       .afterPipe((context, pipe) =>
         logger.log(
