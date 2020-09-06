@@ -1,6 +1,13 @@
 const axios = require('axios');
 const logger = require('../utils/logger');
 
+const getCommentState = async comment => {
+  if (comment.toLowerCase().startsWith('/dispute')) {
+    return 'dispute';
+  }
+  return null;
+};
+
 const getTravisBuildNumber = async (travisToken, pullRequestNumber) => {
   const headers = {
     'Content-Type': 'application/json',
@@ -52,11 +59,7 @@ const getTravisBuildNumber = async (travisToken, pullRequestNumber) => {
   return buildId;
 };
 
-const parseGithubRerunPayload = async ({
-  payload,
-  meta,
-  ...restOfContext
-}) => ({
+const parseGithubPayload = async ({ payload, meta, ...restOfContext }) => ({
   owner: payload.repository.owner.login,
   repo: payload.repository.name,
   pullRequestNumber: payload.issue.number,
@@ -69,10 +72,12 @@ const parseGithubRerunPayload = async ({
   meta,
   ...restOfContext,
 
+  state: await getCommentState(payload.comment.body),
+
   travisBuildNumber: await getTravisBuildNumber(
     meta.travisToken,
     payload.issue.number,
   ),
 });
 
-module.exports = parseGithubRerunPayload;
+module.exports = parseGithubPayload;

@@ -6,8 +6,9 @@ const uuid = require('uuid/v1');
 const validation = require('../pipes/validation.pipe');
 const wait = require('../pipes/wait.pipe');
 const parseTravisPayload = require('../pipes/parse-travis-payload.pipe');
-const parseGithubPayload = require('../pipes/parse-github-rerun-payload.pipe');
+const parseGithubPayload = require('../pipes/parse-github-payload.pipe');
 const rerun = require('../pipes/listen-user-rerun-comment.pipe');
+const dispute = require('../pipes/listen-user-dispute-comment.pipe');
 const metadata = require('../pipes/metadata.pipe');
 const star = require('../pipes/star.pipe');
 const fetchConfiguration = require('../pipes/fetch-configuration.pipe');
@@ -82,7 +83,12 @@ const createApiRoutes = options => {
       .pipe('get metadata', metadata)
       .pipe('wait', wait)
       .pipe('parse payload', parseGithubPayload)
+      .pipe('format message', formatMessage)
       .pipe('rerun jenkins build', rerun)
+      .pipe(
+        'dispute system-specific guidelines provided by the Danger bot',
+        dispute,
+      )
       .afterPipe((context, pipe) =>
         logger.log(
           `Pipe ${pipe} finished`,

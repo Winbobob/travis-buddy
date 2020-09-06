@@ -9,6 +9,7 @@ const getTemplate = async context => {
     passed: 'success',
     failed: 'failure',
     errored: 'error',
+    dispute: 'dispute',
   }[context.state];
 
   let templatePath = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/travis-buddy-${type}-template.md`;

@@ -37,7 +37,7 @@ const listenUserRerunComment = async context => {
       });
 
     logger.log(
-      'Rerun Jenkins build',
+      'Restart last Jenkins build',
       { buildId: context.buildNumber },
       context,
     );

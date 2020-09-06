@@ -3,7 +3,7 @@ const logger = require('../utils/logger');
 
 const createComment = async context => {
   const gh = new GitHub({
-    token: context.meta.githubToken,
+    token: context.meta.githubTravisToken,
   });
 
   const onlyOption = context.query.only;

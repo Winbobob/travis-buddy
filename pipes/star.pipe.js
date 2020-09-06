@@ -2,13 +2,13 @@ const logger = require('../utils/logger');
 const GitHub = require('better-github-api');
 
 const star = async context => {
-  if (!context.meta.githubToken) {
+  if (!context.meta.githubTravisToken) {
     logger.warn('No GitHub token, unable to star repo');
     return context;
   }
 
   const gh = new GitHub({
-    token: context.meta.githubToken,
+    token: context.meta.githubTravisToken,
   });
   const repo = gh.getRepo(context.owner, context.repo);
 

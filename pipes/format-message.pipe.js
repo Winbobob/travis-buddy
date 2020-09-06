@@ -8,6 +8,7 @@ const formatMessage = async context => {
   context.message = mustache.render(context.templateContents, {
     author: context.author,
     pullRequestAuthor: context.pullRequestAuthor,
+    commentAuthor: context.commentAuthor,
     jobs: context.jobs,
     link: context.link,
     requestId: context.requestId,

@@ -3,7 +3,7 @@ const logger = require('../utils/logger');
 
 const editComment = async context => {
   const gh = new GitHub({
-    token: context.meta.githubToken,
+    token: context.meta.githubTravisToken,
   });
 
   const issues = gh.getIssues(context.owner, context.repo);

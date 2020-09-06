@@ -5,7 +5,8 @@ const defaultMaxAttemptsToGetDone = 10;
 const metadata = context => {
   context.meta = {
     user: process.env.github_username,
-    githubToken: process.env.github_access_token,
+    githubTravisToken: process.env.github_travis_bot_access_token,
+    githubDangerToken: process.env.github_danger_bot_access_token,
     travisToken: process.env.travisci_api_token,
     maxAttemptsToGetDone:
       process.env.maxAttemptsToGetDone || defaultMaxAttemptsToGetDone,

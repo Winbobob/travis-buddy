@@ -7,13 +7,13 @@ const getJobDisplayName = (job, index) => {
     return `Node.js: ${job.config.node_js}`;
   } else if (job.config.language === 'ruby') {
     if (job.config.env == 'TESTFOLDER=features') {
-      return 'Feature Tests:'
+      return 'Feature Tests:';
     } else if (job.config.env == 'TESTFOLDER=models') {
-      return 'Unit Tests:'
+      return 'Unit Tests:';
     } else if (job.config.env == 'TESTFOLDER=controllers') {
-      return 'Integration Tests:'
+      return 'Integration Tests:';
     } else if (job.config.env == 'TESTFOLDER=helpers') {
-      return 'Helper Tests:'
+      return 'Helper Tests:';
     } else {
       return `Ruby: ${job.config.rvm}`;
     }
@@ -28,14 +28,19 @@ const createJobObject = (job, index, owner, repoName) => ({
   link: `https://travis-ci.org/${owner}/${repoName}/jobs/${job.id}`,
 });
 
-const getAllComments = async (githubToken, owner, repo, pullRequestNumber) => {
-  if (!githubToken) {
+const getAllComments = async (
+  githubTravisToken,
+  owner,
+  repo,
+  pullRequestNumber,
+) => {
+  if (!githubTravisToken) {
     logger.warn('No Github token, cannot fetch comments');
     return [];
   }
 
   const gh = new GitHub({
-    token: githubToken,
+    token: githubTravisToken,
   });
 
   const issues = gh.getIssues(owner, repo);
@@ -61,18 +66,18 @@ const getAllComments = async (githubToken, owner, repo, pullRequestNumber) => {
 };
 
 const getPullRequestAuthor = async (
-  githubToken,
+  githubTravisToken,
   owner,
   repo,
   pullRequestNumber,
 ) =>
   new Promise((resolve, reject) => {
-    if (!githubToken) {
+    if (!githubTravisToken) {
       logger.warn('No GitHub token, unable to fetch PR owner');
       resolve('Unknown PR author');
     } else {
       const gh = new GitHub({
-        token: githubToken,
+        token: githubTravisToken,
       });
 
       gh
@@ -127,7 +132,7 @@ const parseTravisPayload = async ({ payload, meta, ...restOfContext }) => ({
 
   comments:
     (await getAllComments(
-      meta.githubToken,
+      meta.githubTravisToken,
       payload.repository.owner_name,
       payload.repository.name,
       payload.pull_request_number,
@@ -135,7 +140,7 @@ const parseTravisPayload = async ({ payload, meta, ...restOfContext }) => ({
 
   pullRequestAuthor:
     (await getPullRequestAuthor(
-      meta.githubToken,
+      meta.githubTravisToken,
       payload.repository.owner_name,
       payload.repository.name,
       payload.pull_request_number,
