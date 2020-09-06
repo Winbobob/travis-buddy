@@ -5,6 +5,10 @@ const fetchTemplate = require('./fetch-template.pipe');
 const logger = require('../utils/logger');
 
 const formatMessage = async context => {
+  if (!context.state) {
+    return context;
+  }
+
   context.message = mustache.render(context.templateContents, {
     author: context.author,
     pullRequestAuthor: context.pullRequestAuthor,

@@ -3,6 +3,10 @@ const request = require('request-promise-native');
 const logger = require('../utils/logger');
 
 const getTemplate = async context => {
+  if (!context.state) {
+    return context;
+  }
+
   const { owner, repo, branch, template } = context;
 
   const type = {
@@ -19,10 +23,6 @@ const getTemplate = async context => {
     method: 'GET',
     resolveWithFullResponse: true,
   };
-
-  if (!type) {
-    return context;
-  }
 
   try {
     const res = await request(options);
