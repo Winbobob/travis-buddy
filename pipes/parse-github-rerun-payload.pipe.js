@@ -44,7 +44,7 @@ const getTravisBuildNumber = async (travisToken, pullRequestNumber) => {
       });
 
     round += 1;
-    if (found || round >= 10) {
+    if (found || round >= 50) {
       break;
     }
   }
