@@ -14,7 +14,7 @@ const formatMessage = async context => {
     requestId: context.requestId,
   });
 
-  if (context.config.debug === true) {
+  if (context.config && context.config.debug === true) {
     const debugData = JSON.stringify(context.payload, null, 4);
     context.message = `${context.message}\n\n#Debug Data\n${debugData}`;
   }
