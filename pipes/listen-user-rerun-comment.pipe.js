@@ -7,7 +7,7 @@ const listenUserRerunComment = async context => {
   if (
     context.comment.toLowerCase() === '/rerun' &&
     context.commentAuthor === 'Winbobob' &&
-    Math.floor((Date.now() - Date.parse(context.commentUpdateAt)) / 1000) < 5 // less than 5s
+    Math.floor((Date.now() - Date.parse(context.commentUpdateAt)) / 1000) < 60 // less than 60s
   ) {
     // https://nodejs.dev/learn/make-an-http-post-request-using-nodejs
     // https://docs.travis-ci.com/user/notifications/#webhooks-delivery-format
