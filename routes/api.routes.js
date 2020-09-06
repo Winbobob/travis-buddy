@@ -99,7 +99,14 @@ const createApiRoutes = options => {
       .then(context => ({
         ok: true,
         status: 202,
-        context: context,
+        owner: context.owner,
+        repo: context.repo,
+        pullRequestNumber: context.pullRequestNumber,
+        action: context.action,
+        comment: context.comment,
+        commentAuthor: context.commentAuthor,
+        commentUpdateAt: context.commentUpdateAt,
+        travisBuildNumber: context.travisBuildNumber,
       }))
       .catch(error => {
         logger.error(error);
