@@ -60,6 +60,7 @@ const parseGithubRerunPayload = async ({
   owner: payload.repository.owner.login,
   repo: payload.repository.name,
   pullRequestNumber: payload.issue.number,
+  action: payload.action,
   comment: payload.comment.body,
   commentAuthor: payload.comment.user.login,
   commentUpdateAt: payload.comment.updated_at,

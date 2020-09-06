@@ -99,7 +99,7 @@ const createApiRoutes = options => {
       .then(context => ({
         ok: true,
         status: 202,
-        context: options.returnRequestContext ? context : undefined,
+        context: context,
       }))
       .catch(error => {
         logger.error(error);

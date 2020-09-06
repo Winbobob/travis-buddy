@@ -5,6 +5,7 @@ const listenUserRerunComment = async context => {
   // https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist
 
   if (
+    context.action === 'created' &&
     context.comment.toLowerCase() === '/rerun' &&
     context.commentAuthor === 'Winbobob' &&
     Math.floor((Date.now() - Date.parse(context.commentUpdateAt)) / 1000) < 60 // less than 60s
