@@ -20,6 +20,10 @@ const getTemplate = async context => {
     resolveWithFullResponse: true,
   };
 
+  if (!type) {
+    return context;
+  }
+
   try {
     const res = await request(options);
     context.templateContents = res.body;
