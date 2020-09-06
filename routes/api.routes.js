@@ -73,7 +73,7 @@ const createApiRoutes = options => {
       .then(result => res.status(result.status || 500).send(result)),
   );
 
-  router.post('/rerun', async (req, res) =>
+  router.post('/issue-comment-as-command', async (req, res) =>
     paipu
       .pipe('load payload', {
         startTime: new Date().getTime(),
