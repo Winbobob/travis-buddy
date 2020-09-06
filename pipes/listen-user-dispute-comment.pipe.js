@@ -11,7 +11,7 @@ const listenUserDisputeComment = async context => {
     context.comment.toLowerCase().startsWith('/dispute') &&
     Math.floor((Date.now() - Date.parse(context.commentUpdateAt)) / 1000) < 60 // less than 60s
   ) {
-    const issues = gh.getIssues('expertiza-travisci-bot', context.repo);
+    const issues = gh.getIssues(context.owner, context.repo);
 
     const commentResult = await issues.createIssueComment(
       context.pullRequestNumber,
