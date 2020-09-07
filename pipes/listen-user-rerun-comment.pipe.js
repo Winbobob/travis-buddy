@@ -6,7 +6,8 @@ const listenUserRerunComment = async context => {
 
   if (
     context.action === 'created' &&
-    context.comment.toLowerCase() === '/rerun' &&
+    (context.comment.toLowerCase() === '/rerun' ||
+      context.comment.toLowerCase().startsWith('/approve')) &&
     context.commentAuthor === 'Winbobob' &&
     Math.floor((Date.now() - Date.parse(context.commentUpdateAt)) / 1000) < 60 // less than 60s
   ) {
