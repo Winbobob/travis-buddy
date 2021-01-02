@@ -24,7 +24,7 @@ const listenUserRerunComment = async context => {
 
     axios
       .post(
-        `https://api.travis-ci.org/build/${context.travisBuildNumber}/restart`,
+        `https://api.travis-ci.com/build/${context.travisBuildNumber}/restart`,
         {},
         {
           headers: headers,

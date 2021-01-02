@@ -4,7 +4,7 @@ const stripAnsi = require('strip-ansi');
 
 const requestLog = async jobId => {
   const options = {
-    uri: `https://api.travis-ci.org/jobs/${jobId}/log.txt?deansi=true`,
+    uri: `https://api.travis-ci.com/jobs/${jobId}/log.txt?deansi=true`,
     method: 'GET',
     resolveWithFullResponse: true,
   };

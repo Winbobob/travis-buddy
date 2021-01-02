@@ -11,6 +11,7 @@ const getCommentState = async comment => {
 const getTravisBuildNumber = async (travisToken, pullRequestNumber) => {
   const headers = {
     'Content-Type': 'application/json',
+    Accept: 'application/json',
     'Travis-API-Version': 3,
     Authorization: `token ${travisToken}`,
   };
@@ -24,7 +25,7 @@ const getTravisBuildNumber = async (travisToken, pullRequestNumber) => {
 
     await axios
       .get(
-        `https://api.travis-ci.org/repo/expertiza%2Fexpertiza/builds?limit=100&sort_by=updated_at:desc&offset=${offset}`,
+        `https://api.travis-ci.com/repo/expertiza%2Fexpertiza/builds?limit=100&sort_by=updated_at:desc&offset=${offset}`,
         {
           headers: headers,
         },
