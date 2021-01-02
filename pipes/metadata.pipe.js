@@ -11,9 +11,15 @@ const metadata = context => {
     expertizaDevEmailAddr: process.env.expertiza_dev_email_addr,
     expertizaDevEmailPsw: process.env.expertiza_dev_email_psw,
     instructorGithubUsername: process.env.instructor_github_username,
-    instructorEmailAddr: process.env.instructor_email_addr,
     maintainerGithubUsername: process.env.maintainer_github_username,
-    maintainerEmailAddr: process.env.maintainer_email_addr,
+    teachingStaffGithubUsernames: [
+      process.env.instructor_github_username,
+      process.env.maintainer_github_username,
+    ],
+    emailList: process.env.maintainer_email_addr,
+    // emailList: process.env.instructor_email_addr + ', ' + process.env.maintainer_email_addr,
+    // instructorEmailAddr: process.env.instructor_email_addr,
+    // maintainerEmailAddr: process.env.maintainer_email_addr,
     maxAttemptsToGetDone:
       process.env.maxAttemptsToGetDone || defaultMaxAttemptsToGetDone,
     delay: process.env.delay ? Number(process.env.delay) : 0,

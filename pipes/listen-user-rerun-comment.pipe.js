@@ -21,8 +21,8 @@ const listenUserRerunComment = async context => {
     // https://developer.travis-ci.com/resource/build#restart
 
     if (
-      context.commentAuthor === context.meta.instructor_github_username ||
-      context.commentAuthor === context.meta.maintainer_github_username
+      context.comment.toLowerCase() === '/rerun' ||
+      context.meta.teachingStaffGithubUsernames.includes(context.commentAuthor)
     ) {
       const headers = {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const listenUserRerunComment = async context => {
       // Add a response comment
       await issues.createIssueComment(
         context.pullRequestNumber,
-        'Srudent is not allowed to use the `/approve [UUID]`, `/reject [UUID]` command. Please use `/dispute [UUID]` or `/rerun` commands instead.',
+        'Student is not allowed to use the `/approve [UUID]`, `/reject [UUID]` command. Please use `/dispute [UUID]` or `/rerun` commands instead.',
       );
     }
   }
