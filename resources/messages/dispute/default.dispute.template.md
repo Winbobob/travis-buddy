@@ -1,4 +1,4 @@
 Hey @{{commentAuthor}},  
 We have received your dispute(s), thank you!
 
-cc @Winbobob, please review!
+cc @{{instructorGitHubUsername}}, @{{maintainerGitHubUsername}}, please review!

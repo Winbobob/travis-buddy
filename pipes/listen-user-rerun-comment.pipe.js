@@ -10,7 +10,7 @@ const listenUserRerunComment = async context => {
       context.comment.toLowerCase().startsWith('/approve') ||
       context.comment.toLowerCase().startsWith('/reject')) &&
     context.commentAuthor === 'Winbobob' &&
-    Math.floor((Date.now() - Date.parse(context.commentUpdateAt)) / 1000) < 60 // less than 60s
+    Math.floor((Date.now() - Date.parse(context.commentUpdateAt)) / 1000) < 10 // less than 10s
   ) {
     // https://nodejs.dev/learn/make-an-http-post-request-using-nodejs
     // https://docs.travis-ci.com/user/notifications/#webhooks-delivery-format

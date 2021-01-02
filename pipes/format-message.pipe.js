@@ -16,6 +16,8 @@ const formatMessage = async context => {
     jobs: context.jobs,
     link: context.link,
     requestId: context.requestId,
+    instructorGitHubUsername: context.meta.instructorGithubUsername,
+    maintainerGitHubUsername: context.meta.maintainerGithubUsername,
   });
 
   if (context.config && context.config.debug === true) {
