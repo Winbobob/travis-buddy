@@ -67,6 +67,7 @@ const parseGithubPayload = async ({ payload, meta, ...restOfContext }) => ({
   action: payload.action,
   comment: payload.comment.body,
   commentAuthor: payload.comment.user.login,
+  commentUrl: payload.comment.html_url,
   commentUpdateAt: payload.comment.updated_at,
 
   payload,

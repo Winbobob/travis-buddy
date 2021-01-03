@@ -38,8 +38,8 @@ const listenUserDisputeComment = async context => {
         to: context.meta.emailList,
         subject:
           'One student just disputed the violations given by the Danger bot, please check!',
-        text: 'Here is the pull request link: https://github.com/expertiza/expertiza/pull/'.concat(
-          context.pullRequestNumber,
+        text: 'Here is the link of pull request comment: '.concat(
+          context.commentUrl,
         ),
       };
 
