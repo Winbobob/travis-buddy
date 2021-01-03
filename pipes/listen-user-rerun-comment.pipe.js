@@ -51,7 +51,7 @@ const listenUserRerunComment = async context => {
       // Add a response comment
       await issues.createIssueComment(
         context.pullRequestNumber,
-        'Your request has been accepted by the bot, updating ...',
+        'Your request has been accepted by the bot. Please wait, it can take up to 10 min to process the request.',
       );
 
       logger.log(
