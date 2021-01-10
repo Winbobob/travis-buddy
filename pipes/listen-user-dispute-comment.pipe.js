@@ -60,7 +60,7 @@ const listenUserDisputeComment = async context => {
       // Add a response comment
       await issues.createIssueComment(
         context.pullRequestNumber,
-        'Teaching staff is not allowed to use the `/dispute [UUID]` command. Please use `/approve [UUID]`, `/reject [UUID]` or `/rerun` commands instead.',
+        'Teaching staff is not allowed to use the `/dispute [UUID]` command. Please use `/cancel [UUID]`, `/confirm [UUID]` or `/rerun` commands instead.',
       );
     }
   }

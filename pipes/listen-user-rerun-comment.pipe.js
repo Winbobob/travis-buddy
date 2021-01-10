@@ -12,8 +12,8 @@ const listenUserRerunComment = async context => {
   if (
     context.action === 'created' &&
     (context.comment.toLowerCase() === '/rerun' ||
-      context.comment.toLowerCase().startsWith('/approve') ||
-      context.comment.toLowerCase().startsWith('/reject')) &&
+      context.comment.toLowerCase().startsWith('/cancel') ||
+      context.comment.toLowerCase().startsWith('/confirm')) &&
     Math.floor((Date.now() - Date.parse(context.commentUpdateAt)) / 1000) < 10 // less than 10s
   ) {
     // https://nodejs.dev/learn/make-an-http-post-request-using-nodejs
@@ -63,7 +63,7 @@ const listenUserRerunComment = async context => {
       // Add a response comment
       await issues.createIssueComment(
         context.pullRequestNumber,
-        'Student is not allowed to use the `/approve [UUID]`, `/reject [UUID]` command. Please use `/dispute [UUID]` or `/rerun` commands instead.',
+        'Student is not allowed to use the `/cancel [UUID]`, `/confirm [UUID]` command. Please use `/dispute [UUID]` or `/rerun` commands instead.',
       );
     }
   }
