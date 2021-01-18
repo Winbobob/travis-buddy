@@ -7,6 +7,7 @@ const validation = require('../pipes/validation.pipe');
 const wait = require('../pipes/wait.pipe');
 const parseTravisPayload = require('../pipes/parse-travis-payload.pipe');
 const parseGithubPayload = require('../pipes/parse-github-payload.pipe');
+const help = require('../pipes/listen-user-help-comment.pipe');
 const rerun = require('../pipes/listen-user-rerun-comment.pipe');
 const dispute = require('../pipes/listen-user-dispute-comment.pipe');
 const metadata = require('../pipes/metadata.pipe');
@@ -84,6 +85,7 @@ const createApiRoutes = options => {
       .pipe('wait', wait)
       .pipe('parse payload', parseGithubPayload)
       .pipe('format message', formatMessage)
+      .pipe('print help message', help)
       .pipe('rerun jenkins build', rerun)
       .pipe(
         'dispute system-specific guidelines provided by the Danger bot',

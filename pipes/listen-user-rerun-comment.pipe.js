@@ -63,7 +63,7 @@ const listenUserRerunComment = async context => {
       // Add a response comment
       await issues.createIssueComment(
         context.pullRequestNumber,
-        'Student is not allowed to use the `/cancel [UUID]`, `/confirm [UUID]` command. Please use `/dispute [UUID]` or `/rerun` commands instead.',
+        'Student is not allowed to use the `/cancel [UUID]`, `/confirm [UUID]` command. Please use<br/>- `/rerun`<br/>- `/dispute [UUID]`',
       );
     }
   }
