@@ -18,6 +18,10 @@ const formatMessage = async context => {
     requestId: context.requestId,
     instructorGitHubUsername: context.meta.instructorGithubUsername,
     maintainerGitHubUsername: context.meta.maintainerGithubUsername,
+    teachingAssistant1GithubUsername:
+      context.meta.teachingAssistant1GithubUsername,
+    teachingAssistant2GithubUsername:
+      context.meta.teachingAssistant2GithubUsername,
   });
 
   if (context.config && context.config.debug === true) {
